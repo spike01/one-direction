@@ -5,12 +5,10 @@ require(["esri/map",
          "esri/dijit/LocateButton",
          "esri/toolbars/draw",
          "esri/graphic",
-//         "esri/geometry/Polyline",
 
          "esri/symbols/SimpleMarkerSymbol",
          "esri/symbols/SimpleLineSymbol",
          "esri/symbols/SimpleFillSymbol",
-//         "esri/geometry/webMercatorUtils",
 
          "dijit/registry",
 
@@ -28,23 +26,6 @@ require(["esri/map",
 
              map.on("load", createToolbar);
              map.on("load", drawData);
-
-             // var layerDefinition = {
-             //       "geometryType": "esriGeometryPolygon",
-             //       "fields": [{
-             //               "name": "BUFF_DIST",
-             //               "type": "esriFieldTypeInteger",
-             //               "alias": "Buffer Distance"
-             //                           }]
-             //         }
-             // var featureCollection = {
-             //       layerDefinition: layerDefinition,
-             //       featureSet: null
-             //     }
-             // var routeLayer = new FeatureLayer(featureCollection, {
-             //    showLabels: true
-             // })
-             // map.addLayer(routeLayer)
 
              navigator.geolocation.getCurrentPosition(function(position) {
                map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15)
@@ -82,40 +63,17 @@ require(["esri/map",
                map.showZoomSlider();
                symbol = new SimpleLineSymbol();
 
-               // console.log(evt.geometry);
-               // console.log(geo);
-
                var graphic = new Graphic(evt.geometry, symbol);
-               //var graphic2 = new Graphic(geo, symbol);
-//               console.log(evt.geometry)
                map.graphics.add(graphic);
-
-               // var polyline = new Polyline({
-               // //  paths: geo.paths
-               // });
-               // console.log(polyline)
-
-//               graphic2 = new Graphic({geometry: polyline, symbol: symbol});
-
-
-               // console.log(map.graphics.add(graphic2))
            }
 
            function drawData() {
              if(window.geo) {
                var symbol;
                symbol = new SimpleLineSymbol();
-//               console.log(geo)
                var graphic = new Graphic({geometry: geo}, symbol);
-graphic.symbol = new SimpleLineSymbol();
-               //map.enableMapNavigation();
-//               console.log(map.graphics.add(graphic));
-               // routeLayer.applyEdits([graphic])
-               // map.addLayer(routeLayer)
-console.log(graphic)
+               graphic.symbol = new SimpleLineSymbol();
                map.graphics.add(graphic)
              }
            }
-
-//          drawData();
          });
