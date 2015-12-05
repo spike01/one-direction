@@ -53,7 +53,8 @@ require(["esri/map",
              function addAndSend(evt) {
                addToMap(evt)
                $.post("/save", JSON.stringify(evt.geometry), function(response) {
-                  $("#link").text("http://techcrunch-one-direction.com/" + JSON.parse(response).key);
+                  $("#share").attr("value", "http://techcrunch-one-direction.com/" + JSON.parse(response).key);
+                  $("#link").modal();
                });
              }
 
