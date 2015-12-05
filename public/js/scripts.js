@@ -16,12 +16,12 @@ function init() {
 
   "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
   "dijit/form/Button", "dijit/WidgetSet",
-  "dojo/domReady!"], 
+  "dojo/domReady!"],
   everythingElse)
 }
 
 function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
-                        SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, 
+                        SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol,
                         registry) {
 
   var map = new Map("map", {
@@ -38,6 +38,8 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
   navigator.geolocation.getCurrentPosition(function(position) {
     map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15)
   });
+
+  var lineSymbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID);
 
   geoLocate = new LocateButton({
     map: map,
@@ -85,10 +87,8 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
 
   function drawData() {
     if(window.geo) {
-      var symbol;
-      symbol = new SimpleLineSymbol();
-      var graphic = new Graphic({geometry: geo}, symbol);
-      graphic.symbol = new SimpleLineSymbol();
+      var graphic = new Graphic({geometry: geo});
+      graphic.symbol = lineSymbol;
       map.graphics.add(graphic);
     }
   }
