@@ -16,10 +16,10 @@ post "/save" do
   store.transaction do
       store[key.to_sym] = value
   end
-
-  p key
+  {key: key}.to_json
 end
 
 get "/:key" do
-  store.transaction { p store[params[:key].to_sym] }
+  @geometry = store.transaction { store[params[:key].to_sym] }.to_json
+  erb :route
 end

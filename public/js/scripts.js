@@ -42,7 +42,14 @@ require(["esri/map",
 
            function createToolbar(themap) {
              toolbar = new Draw(map);
-             toolbar.on("draw-end", addToMap);
+             toolbar.on("draw-end", addAndSend);
+           }
+
+           function addAndSend(evt) {
+             addToMap(evt)
+             $.post("/save", JSON.stringify(evt.geometry), function(response) {
+                $("#link").text("http://techcrunch-one-direction.com/" + JSON.parse(response).key);
+             });
            }
 
            function addToMap(evt) {
@@ -52,6 +59,10 @@ require(["esri/map",
              symbol = new SimpleLineSymbol();
              var graphic = new Graphic(evt.geometry, symbol);
              map.graphics.add(graphic);
-             $.post("/save", JSON.stringify(evt.geometry));
+           }
+
+           if(window.geo) {
+             console.log(map.graphics)
+             addToMap({geometry: geo})
            }
          });
