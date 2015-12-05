@@ -75,7 +75,6 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
     toolbar.deactivate();
     map.showZoomSlider();
     symbol = new SimpleLineSymbol();
-
     var graphic = new Graphic(evt.geometry, symbol);
     map.graphics.add(graphic);
   }
@@ -93,6 +92,7 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
   $("#retry").click(function() {
     $.modal.close();
     map.graphics.clear();
+    $("#draw").show();
   })
 };
 
