@@ -18,5 +18,5 @@ end
 
 get "/:key" do
   @geometry = store.transaction { store[params[:key].to_sym] }.to_json
-  erb :route
+  erb :index
 end
