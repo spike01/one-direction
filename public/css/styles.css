@@ -21,3 +21,10 @@ html, body, #map {
           transition: all .3s ease;
   text-transform: uppercase;
 }
+
+#link {
+  position: absolute;
+  z-index: 10;
+  top: 65%;
+  left: 40%;
+}
