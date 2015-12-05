@@ -32,19 +32,11 @@ require(["esri/map",
            }, "LocateButton");
            geoLocate.startup();
 
-           // loop through all dijits, connect onClick event
-           // listeners for buttons to activate drawing tools
-           registry.forEach(function(d) {
-             // d is a reference to a dijit
-             // could be a layout container or a button
-             if ( d.declaredClass === "dijit.form.Button" ) {
-               d.on("click", activateTool);
-             }
-           });
+           drawBtn = $("#draw");
+           drawBtn.on("click", activateTool);
 
            function activateTool() {
-             var tool = this.label.toUpperCase().replace(/ /g, "_");
-             toolbar.activate(Draw[tool]);
+             toolbar.activate(Draw["FREEHAND_POLYLINE"]);
              map.hideZoomSlider();
            }
 

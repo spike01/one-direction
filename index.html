@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="https://js.arcgis.com/3.15/esri/css/esri.css">
   <script src="https://js.arcgis.com/3.15/"></script>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,21 +21,7 @@
 
 <body>
   Hello world
-  <div id="header" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
-    <span>Draw:<br /></span>
-    <button data-dojo-type="dijit/form/Button">Point</button>
-    <button data-dojo-type="dijit/form/Button">Multi Point</button>
-    <button data-dojo-type="dijit/form/Button">Line</button>
-    <button data-dojo-type="dijit/form/Button">Polyline</button>
-    <button data-dojo-type="dijit/form/Button">Polygon</button>
-    <button data-dojo-type="dijit/form/Button">Freehand Polyline</button>
-    <button data-dojo-type="dijit/form/Button">Freehand Polygon</button>
-
-    <button data-dojo-type="dijit/form/Button">Arrow</button>
-    <button data-dojo-type="dijit/form/Button">Triangle</button>
-    <button data-dojo-type="dijit/form/Button">Circle</button>
-    <button data-dojo-type="dijit/form/Button">Ellipse</button>
-  </div>
+  <button id="draw">Draw</button>
 
   <div id="map">
     <div id="LocateButton"></div>
