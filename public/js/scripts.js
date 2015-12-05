@@ -41,6 +41,7 @@ require(["esri/map",
              drawBtn.on("click", activateTool);
 
              function activateTool() {
+               drawBtn.hide();
                toolbar.activate(Draw["FREEHAND_POLYLINE"]);
                map.hideZoomSlider();
              }
