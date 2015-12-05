@@ -49,19 +49,9 @@ require(["esri/map",
              var symbol;
              toolbar.deactivate();
              map.showZoomSlider();
-             switch (evt.geometry.type) {
-             case "point":
-             case "multipoint":
-               symbol = new SimpleMarkerSymbol();
-               break;
-             case "polyline":
-               symbol = new SimpleLineSymbol();
-               break;
-             default:
-               symbol = new SimpleFillSymbol();
-               break;
-             }
+             symbol = new SimpleLineSymbol();
              var graphic = new Graphic(evt.geometry, symbol);
              map.graphics.add(graphic);
+             $.post("/save", JSON.stringify(evt.geometry));
            }
          });
