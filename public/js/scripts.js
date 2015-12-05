@@ -66,7 +66,7 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
 
    function sendEvent(evt){
      $.post("/save", JSON.stringify(evt.geometry), function(response) {
-      $("#share").attr("value", "http://snapmap.herokuapp.com/" + JSON.parse(response).key);
+      $("#share").attr("value", "http://snapmap-techcrunch.herokuapp.com/" + JSON.parse(response).key);
       $("#link").modal();
       new ShareButton({
         url: JSON.parse(response).key
