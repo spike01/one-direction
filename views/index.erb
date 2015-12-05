@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/jquery.modal.css">
+  <link rel="stylesheet" href="css/share-button.css">
 
   <link rel="stylesheet" href="https://js.arcgis.com/3.15/esri/css/esri.css">
   <link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
@@ -22,7 +23,13 @@
 <body>
   <div id="link" class="modal" style="display: none;">
     <div>
-      Your link: <input id="share" type="text">
+      <p>Your map lives in this URL:</p>
+      <p>
+        <input id="share" type="text"><button id="copy">Copy</button>
+      </p>
+      <p>
+        <share-button></share-button>
+      </p>
     </div>
   </div>
   <button id="draw">Draw</button>
@@ -30,6 +37,7 @@
   <div id="map">
     <div id="LocateButton"></div>
   </div>
+  <script src="js/share-button.js"></script>
   <script src="https://js.arcgis.com/3.15/"></script>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="js/jquery.modal.min.js"></script>

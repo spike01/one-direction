@@ -1,7 +1,49 @@
-#map {
-  height: 1136px;
-  width: 640px;
+html, body, #map {
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
+#copy {
+  position: relative;
+  font-size: 16px;
+  color: #333;
+  background: #a29baa;
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  font-family: Lato, sans-serif;
+  font-weight: 800;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-transition: all .3s ease;
+          transition: all .3s ease;
+  text-transform: uppercase;
+}
+
+#draw {
+  position: relative;
+  font-size: 16px;
+  color: #333;
+  background: #a29baa;
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  font-family: Lato, sans-serif;
+  font-weight: 800;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-transition: all .3s ease;
+          transition: all .3s ease;
+  text-transform: uppercase;
+}
+
+#copy:before {
+  position: absolute;
+  line-height: 1em;
+  left: 0.6em;
+  width: 1em;
+  height: 1em;
+  content: ' ';
+}
