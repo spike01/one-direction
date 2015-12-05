@@ -61,14 +61,18 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
 
   function addAndSend(evt) {
     addToMap(evt);
-    $.post("/save", JSON.stringify(evt.geometry), function(response) {
+    sendEvent(evt);
+  }
+
+   function sendEvent(evt){
+     $.post("/save", JSON.stringify(evt.geometry), function(response) {
       $("#share").attr("value", "http://techcrunch-one-direction.com/" + JSON.parse(response).key);
       $("#link").modal();
       new ShareButton({
         url: JSON.parse(response).key
       })
     });
-  }
+   }
 
   function addToMap(evt) {
     var symbol;
