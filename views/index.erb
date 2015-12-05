@@ -28,7 +28,7 @@
         <input id="share" type="text">
       </p>
       <p>
-        <button id="copy" class="fancy-button">Copy</button>
+        <button id="copy" class="fancy-button" data-clipboard-target="#share">Copy</button>
         <share-button></share-button>
         <button id="retry" class="fancy-button">Try again</button>
       </p>
@@ -40,6 +40,7 @@
     <div id="LocateButton"></div>
   </div>
   <script src="js/share-button.js"></script>
+  <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
   <script src="https://js.arcgis.com/3.15/"></script>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="js/jquery.modal.min.js"></script>

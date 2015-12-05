@@ -100,5 +100,6 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
   })
 };
 
+new Clipboard('#copy');
 
 init();
