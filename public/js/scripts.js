@@ -1,22 +1,24 @@
 window.test_geo = null;
 
-require([
-    "esri/map",
-    "esri/layers/FeatureLayer",
-    "esri/dijit/LocateButton",
-    "esri/toolbars/draw",
-    "esri/graphic",
+function init() {
+  require([
+  "esri/map",
+  "esri/layers/FeatureLayer",
+  "esri/dijit/LocateButton",
+  "esri/toolbars/draw",
+  "esri/graphic",
 
-    "esri/symbols/SimpleMarkerSymbol",
-    "esri/symbols/SimpleLineSymbol",
-    "esri/symbols/SimpleFillSymbol",
+  "esri/symbols/SimpleMarkerSymbol",
+  "esri/symbols/SimpleLineSymbol",
+  "esri/symbols/SimpleFillSymbol",
 
-    "dijit/registry",
+  "dijit/registry",
 
-    "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
-    "dijit/form/Button", "dijit/WidgetSet",
-    "dojo/domReady!"], 
-    everythingElse)
+  "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+  "dijit/form/Button", "dijit/WidgetSet",
+  "dojo/domReady!"], 
+  everythingElse)
+}
 
 function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
                         SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, 
@@ -87,4 +89,12 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
       map.graphics.add(graphic);
     }
   }
+
+  $("#retry").click(function() {
+    $.modal.close();
+    map.graphics.clear();
+  })
 };
+
+
+init();
