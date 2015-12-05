@@ -12,10 +12,7 @@ end
 post "/save" do
   key = SecureRandom.hex.slice(0, 6)
   value = JSON.parse(request.body.read)
-
-  store.transaction do
-      store[key.to_sym] = value
-  end
+  store.transaction { store[key.to_sym] = value }
   {key: key}.to_json
 end
 
