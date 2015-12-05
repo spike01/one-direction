@@ -1,81 +1,81 @@
 window.test_geo = null;
 
 require(["esri/map",
-         "esri/layers/FeatureLayer",
-         "esri/dijit/LocateButton",
-         "esri/toolbars/draw",
-         "esri/graphic",
+    "esri/layers/FeatureLayer",
+    "esri/dijit/LocateButton",
+    "esri/toolbars/draw",
+    "esri/graphic",
 
-         "esri/symbols/SimpleMarkerSymbol",
-         "esri/symbols/SimpleLineSymbol",
-         "esri/symbols/SimpleFillSymbol",
+    "esri/symbols/SimpleMarkerSymbol",
+    "esri/symbols/SimpleLineSymbol",
+    "esri/symbols/SimpleFillSymbol",
 
-         "dijit/registry",
+    "dijit/registry",
 
-         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
-         "dijit/form/Button", "dijit/WidgetSet",
-           "dojo/domReady!"], function(Map, FeatureLayer, LocateButton, Draw, Graphic,
-                                       SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, registry) {
-             var map = new Map("map", {
-               zoom: 15,
-               basemap: "topo"
-             });
+    "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+    "dijit/form/Button", "dijit/WidgetSet",
+    "dojo/domReady!"], function(Map, FeatureLayer, LocateButton, Draw, Graphic,
+      SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, registry) {
+      var map = new Map("map", {
+        zoom: 15,
+        basemap: "topo"
+      });
 
 
-             navigator.geolocation.getCurrentPosition(function(position) { map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15) });
+      navigator.geolocation.getCurrentPosition(function(position) { map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15) });
 
-             map.on("load", createToolbar);
-             map.on("load", drawData);
+      map.on("load", createToolbar);
+      map.on("load", drawData);
 
-             navigator.geolocation.getCurrentPosition(function(position) {
-               map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15)
-             });
+      navigator.geolocation.getCurrentPosition(function(position) {
+        map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15)
+      });
 
-             geoLocate = new LocateButton({
-               map: map,
-               scale: 12000
-             }, "LocateButton");
-             geoLocate.startup();
+      geoLocate = new LocateButton({
+        map: map,
+        scale: 12000
+      }, "LocateButton");
+      geoLocate.startup();
 
-             drawBtn = $("#draw");
-             drawBtn.on("click", activateTool);
+      drawBtn = $("#draw");
+      drawBtn.on("click", activateTool);
 
-             function activateTool() {
-               drawBtn.hide();
-               toolbar.activate(Draw["FREEHAND_POLYLINE"]);
-               map.hideZoomSlider();
-             }
+      function activateTool() {
+        drawBtn.hide();
+        toolbar.activate(Draw["FREEHAND_POLYLINE"]);
+        map.hideZoomSlider();
+      }
 
-             function createToolbar(themap) {
-               toolbar = new Draw(map);
-               toolbar.on("draw-end", addAndSend);
-             }
+      function createToolbar(themap) {
+        toolbar = new Draw(map);
+        toolbar.on("draw-end", addAndSend);
+      }
 
-             function addAndSend(evt) {
-               addToMap(evt)
-               $.post("/save", JSON.stringify(evt.geometry), function(response) {
-                  $("#share").attr("value", "http://techcrunch-one-direction.com/" + JSON.parse(response).key);
-                  $("#link").modal();
-               });
-             }
+      function addAndSend(evt) {
+        addToMap(evt)
+          $.post("/save", JSON.stringify(evt.geometry), function(response) {
+            $("#share").attr("value", "http://techcrunch-one-direction.com/" + JSON.parse(response).key);
+            $("#link").modal();
+          });
+      }
 
-             function addToMap(evt) {
-               var symbol;
-               toolbar.deactivate();
-               map.showZoomSlider();
-               symbol = new SimpleLineSymbol();
+      function addToMap(evt) {
+        var symbol;
+        toolbar.deactivate();
+        map.showZoomSlider();
+        symbol = new SimpleLineSymbol();
 
-               var graphic = new Graphic(evt.geometry, symbol);
-               map.graphics.add(graphic);
-           }
+        var graphic = new Graphic(evt.geometry, symbol);
+        map.graphics.add(graphic);
+      }
 
-           function drawData() {
-             if(window.geo) {
-               var symbol;
-               symbol = new SimpleLineSymbol();
-               var graphic = new Graphic({geometry: geo}, symbol);
-               graphic.symbol = new SimpleLineSymbol();
-               map.graphics.add(graphic)
-             }
-           }
-         });
+      function drawData() {
+        if(window.geo) {
+          var symbol;
+          symbol = new SimpleLineSymbol();
+          var graphic = new Graphic({geometry: geo}, symbol);
+          graphic.symbol = new SimpleLineSymbol();
+          map.graphics.add(graphic)
+        }
+      }
+    });
