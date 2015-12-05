@@ -7,24 +7,22 @@ require(["esri/map",
          "esri/symbols/SimpleLineSymbol",
          "esri/symbols/SimpleFillSymbol",
 
-         "dojo/parser", "dijit/registry",
+         "dijit/registry",
 
          "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
          "dijit/form/Button", "dijit/WidgetSet",
          "dojo/domReady!"], function(Map, LocateButton, Draw, Graphic,
-                                     SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, parser, registry) {
-           var coords;
-           navigator.geolocation.getCurrentPosition(function(position) { coords =[position.coords.latitude, position.coords.longitude]});
-
-           parser.parse();
-
+                                     SimpleMarkerSymbol, SimpleLineSymbol, registry) {
            var map = new Map("map", {
-             center: coords,
-             zoom: 20,
+             zoom: 15,
              basemap: "topo"
            });
 
            map.on("load", createToolbar);
+
+           navigator.geolocation.getCurrentPosition(function(position) {
+             map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15)
+           });
 
            geoLocate = new LocateButton({
              map: map,
