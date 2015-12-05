@@ -4,6 +4,7 @@
   "description": "Ft. Irina, Spike and whoever else we can convince",
   "main": "index.js",
   "scripts": {
+    "start": "http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
