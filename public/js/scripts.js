@@ -1,11 +1,10 @@
-window.test_geo = null;
-
 function init() {
   require([
   "esri/map",
   "esri/layers/FeatureLayer",
   "esri/dijit/LocateButton",
   "esri/toolbars/draw",
+  "esri/Color",
   "esri/graphic",
 
   "esri/symbols/SimpleMarkerSymbol",
@@ -20,7 +19,7 @@ function init() {
   everythingElse)
 }
 
-function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
+function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
                         SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol,
                         registry) {
 
@@ -39,7 +38,8 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
     map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15)
   });
 
-  var lineSymbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID);
+  var color = new Color([51,105,232]);
+  var lineSymbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, color, 7);
 
   geoLocate = new LocateButton({
     map: map,
@@ -80,8 +80,7 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Graphic,
     var symbol;
     toolbar.deactivate();
     map.showZoomSlider();
-    symbol = new SimpleLineSymbol();
-    var graphic = new Graphic(evt.geometry, symbol);
+    var graphic = new Graphic(evt.geometry, lineSymbol);
     map.graphics.add(graphic);
   }
 
