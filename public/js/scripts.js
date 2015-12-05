@@ -13,16 +13,13 @@ require(["esri/map",
          "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
          "dijit/form/Button", "dijit/WidgetSet",
            "dojo/domReady!"], function(Map, FeatureLayer, LocateButton, Draw, Graphic,
-                                       SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, parser, registry) {
-             var coords;
-             navigator.geolocation.getCurrentPosition(function(position) { coords =[position.coords.latitude, position.coords.longitude]});
-
-             parser.parse();
-
+                                       SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, registry) {
              var map = new Map("map", {
                zoom: 15,
                basemap: "topo"
              });
+
+             navigator.geolocation.getCurrentPosition(function(position) { map.centerAndZoom([position.coords.longitude, position.coords.latitude], 15) });
 
              map.on("load", createToolbar);
              map.on("load", drawData);
