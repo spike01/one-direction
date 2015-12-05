@@ -51,7 +51,6 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   drawBtn.on("click", activateTool);
 
   function activateTool() {
-    drawBtn.hide();
     toolbar.activate(Draw["FREEHAND_POLYLINE"]);
     map.hideZoomSlider();
   }
@@ -69,10 +68,6 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
    function sendEvent(evt){
      $.post("/save", JSON.stringify(evt.geometry), function(response) {
       $("#share").attr("value", "http://snapmap-techcrunch.herokuapp.com/" + JSON.parse(response).key);
-      $("#link").modal();
-      new ShareButton({
-        url: JSON.parse(response).key
-      })
     });
    }
 
@@ -101,4 +96,5 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
 
 new Clipboard('#copy');
 
+new ShareButton();
 init();
