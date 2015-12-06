@@ -143,6 +143,7 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   function reset() {
     lines = [];
     map.graphics.clear();
+    $("#saywhat").val("");
     $("#draw").show();
     $("share-button").hide();
     $("#label").hide();
