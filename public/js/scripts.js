@@ -76,8 +76,8 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   })
 
   function activateTool() {
+    $("#retry").show();
     if(window.geo) {
-      $("#retry").show();
       reset();
     }
     toolbar.activate(Draw["FREEHAND_POLYLINE"]);
@@ -143,6 +143,10 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
     lines = [];
     map.graphics.clear();
     $("#draw").show();
+    $("share-button").hide();
+    $("#label").hide();
+    $("#retry").hide();
+    $("#done").hide()
   }
 };
 
