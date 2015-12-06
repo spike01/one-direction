@@ -7,3 +7,4 @@ $("#label").hide();
 if(window.geo) {
   $("#retry").hide();
 }
+

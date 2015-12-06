@@ -149,3 +149,7 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
 new Clipboard('#copy');
 
 init();
+
+$(function() {
+  $("#saywhat").emojiPicker();
+})
