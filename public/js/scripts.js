@@ -53,6 +53,8 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   doneBtn = $("#done");
   doneBtn.hide();
   doneBtn.on("click", function() {
+    toolbar.deactivate();
+    map.showZoomSlider();
     $("share-button").show();
     $("#copy").show();
     $("#label").show();
@@ -92,8 +94,6 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
 
   function addToMap(evt) {
     var symbol;
-    toolbar.deactivate();
-    map.showZoomSlider();
     var graphic = new Graphic(evt.geometry, lineSymbol);
     map.graphics.add(graphic);
   }
