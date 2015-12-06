@@ -1,5 +1,4 @@
 
-$("share-button").hide();
 
 //doneBtn = $("#done");
 //doneBtn.hide();

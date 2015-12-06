@@ -22,13 +22,13 @@
   <div id="link">
     <div>
       <p>
-      <button id="copy" class="fancy-button" data-clipboard-target="#share" style="display: none;">Copy</button>
-        <share-button style="display: none;"></share-button>
+      <share-button style="display: none;"></share-button>
       </p>
       <div id="label">
-      <p>Your map lives in this URL:</p>
+      <p>Your Snapmap:</p>
       <p>
         <input id="share" type="text">
+        <button id="copy" class="fancy-button" data-clipboard-target="#share" style="display: none;">Copy</button>
       </p>
       </div>
       <p>
@@ -46,8 +46,8 @@
     var geo = <%= @geometry || "undefined" %>
   </script>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="js/setup.js"></script>
   <script src="js/share-button.js"></script>
+  <script src="js/setup.js"></script>
   <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
   <script src="https://js.arcgis.com/3.15/"></script>
   <script src="js/scripts.js"></script>
