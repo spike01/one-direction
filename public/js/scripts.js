@@ -1,3 +1,15 @@
+doneBtn = $("#done");
+doneBtn.hide();
+
+new ShareButton();
+
+$("share-button").hide();
+$("#label").hide();
+
+if(window.geo) {
+  $("#retry").hide();
+}
+
 function init() {
   require([
   "esri/map",
@@ -50,8 +62,6 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   drawBtn = $("#draw");
   drawBtn.on("click", activateTool);
 
-  doneBtn = $("#done");
-  doneBtn.hide();
   doneBtn.on("click", function() {
     toolbar.deactivate();
     map.showZoomSlider();
@@ -100,7 +110,6 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
 
   function drawData() {
     if(window.geo) {
-      $("#retry").hide();
       geo.forEach(function(line) {
         var graphic = new Graphic({geometry: line});
         graphic.symbol = lineSymbol;
@@ -118,10 +127,6 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   }
 };
 
-
 new Clipboard('#copy');
 
-new ShareButton();
-$("share-button").hide();
-$("#label").hide();
 init();
