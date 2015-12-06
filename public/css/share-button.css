@@ -15,6 +15,12 @@ share-button {
           transition: all .3s ease;
   text-transform: uppercase;
 }
+
+body {
+  font-family: Lato, sans-serif;
+  text-transform: uppercase;
+}
+
 share-button:hover {
   color: rgba(51,51,51,0.8);
   background: rgba(162,155,170,0.8);
