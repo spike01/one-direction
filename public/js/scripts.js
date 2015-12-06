@@ -76,10 +76,11 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   })
 
   function activateTool() {
-    $("#retry").show();
     if(window.geo) {
+      $("#saywhat").val("");
       reset();
     }
+    $("#retry").show();
     toolbar.activate(Draw["FREEHAND_POLYLINE"]);
     map.hideZoomSlider();
     drawBtn.hide();
