@@ -53,10 +53,17 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   doneBtn = $("#done");
   doneBtn.hide();
   doneBtn.on("click", function() {
+    $("share-button").show();
+    $("#copy").show();
+    $("#label").show();
     sendEvent();
   })
 
   function activateTool() {
+    if(window.geo) {
+      $("#retry").show();
+      reset();
+    }
     toolbar.activate(Draw["FREEHAND_POLYLINE"]);
     map.hideZoomSlider();
     drawBtn.hide();
@@ -93,6 +100,7 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
 
   function drawData() {
     if(window.geo) {
+      $("#retry").hide();
       geo.forEach(function(line) {
         var graphic = new Graphic({geometry: line});
         graphic.symbol = lineSymbol;
@@ -101,14 +109,19 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
     }
   }
 
-  $("#retry").click(function() {
-    $.modal.close();
+  $("#retry").click(reset)
+
+  function reset() {
+    lines = [];
     map.graphics.clear();
     $("#draw").show();
-  })
+  }
 };
+
 
 new Clipboard('#copy');
 
 new ShareButton();
+$("share-button").hide();
+$("#label").hide();
 init();
