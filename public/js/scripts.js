@@ -1,14 +1,18 @@
-doneBtn = $("#done");
-doneBtn.hide();
-
-new ShareButton();
 
 $("share-button").hide();
-$("#label").hide();
 
-if(window.geo) {
-  $("#retry").hide();
-}
+//doneBtn = $("#done");
+//doneBtn.hide();
+
+//$("#label").hide();
+
+//if(window.geo) {
+  //$("#retry").hide();
+//}
+
+// Above is handled in setup.js, but shown here so we don't have to flick
+// through files
+
 
 function init() {
   require([
@@ -68,6 +72,7 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
     $("share-button").show();
     $("#copy").show();
     $("#label").show();
+    $("#done").hide();
     sendEvent();
   })
 
@@ -98,12 +103,17 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
 
    function sendEvent(){
      $.post("/save", JSON.stringify(lines), function(response) {
-      $("#share").attr("value", "http://snapmap-techcrunch.herokuapp.com/" + JSON.parse(response).key);
+       var url = "http://snapmap-techcrunch.herokuapp.com/" + JSON.parse(response).key
+       $("#share").attr("value", url);
+       new ShareButton({
+         url: url,
+         title: "Maps - in a snap!",
+         description: "Maps - in a snap!"
+      });
     });
    }
 
   function addToMap(evt) {
-    var symbol;
     var graphic = new Graphic(evt.geometry, lineSymbol);
     map.graphics.add(graphic);
   }
