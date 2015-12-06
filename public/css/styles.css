@@ -35,3 +35,10 @@ div#LocateButton.LocateButton {
   top: 65%;
   left: 40%;
 }
+
+#message {
+  position: absolute;
+  z-index: 10;
+  bottom: 95%;
+  left: 40%;
+}

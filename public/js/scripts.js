@@ -101,7 +101,12 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   }
 
    function sendEvent(){
-     $.post("/save", JSON.stringify(lines), function(response) {
+     console.log(getMessage())
+     var payload = {
+       lines: lines,
+       message: getMessage()
+     }
+     $.post("/save", JSON.stringify(payload), function(response) {
        var url = "http://snapmap-techcrunch.herokuapp.com/" + JSON.parse(response).key
        $("#share").attr("value", url);
        new ShareButton({
@@ -112,6 +117,10 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
     });
    }
 
+  function getMessage() {
+    return $("#saywhat").val();
+  }
+
   function addToMap(evt) {
     var graphic = new Graphic(evt.geometry, lineSymbol);
     map.graphics.add(graphic);
@@ -119,7 +128,8 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
 
   function drawData() {
     if(window.geo) {
-      geo.forEach(function(line) {
+      $("#saywhat").val(geo.message)
+      geo.lines.forEach(function(line) {
         var graphic = new Graphic({geometry: line});
         graphic.symbol = lineSymbol;
         map.graphics.add(graphic);
