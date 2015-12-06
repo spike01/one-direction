@@ -50,23 +50,35 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
   drawBtn = $("#draw");
   drawBtn.on("click", activateTool);
 
+  doneBtn = $("#done");
+  doneBtn.hide();
+  doneBtn.on("click", function() {
+    sendEvent();
+  })
+
   function activateTool() {
+    toolbar.activate(Draw["FREEHAND_POLYLINE"]);
+    map.hideZoomSlider();
+    drawBtn.hide();
+    doneBtn.show();
+  }
+
+  var lines = []
+
+  function createToolbar() {
+    toolbar = new Draw(map);
+    toolbar.on("draw-end", addLine);
+  }
+
+  function addLine(evt) {
+    lines.push(evt.geometry);
+    addToMap(evt);
     toolbar.activate(Draw["FREEHAND_POLYLINE"]);
     map.hideZoomSlider();
   }
 
-  function createToolbar(themap) {
-    toolbar = new Draw(map);
-    toolbar.on("draw-end", addAndSend);
-  }
-
-  function addAndSend(evt) {
-    addToMap(evt);
-    sendEvent(evt);
-  }
-
-   function sendEvent(evt){
-     $.post("/save", JSON.stringify(evt.geometry), function(response) {
+   function sendEvent(){
+     $.post("/save", JSON.stringify(lines), function(response) {
       $("#share").attr("value", "http://snapmap-techcrunch.herokuapp.com/" + JSON.parse(response).key);
     });
    }
@@ -81,9 +93,11 @@ function everythingElse(Map, FeatureLayer, LocateButton, Draw, Color, Graphic,
 
   function drawData() {
     if(window.geo) {
-      var graphic = new Graphic({geometry: geo});
-      graphic.symbol = lineSymbol;
-      map.graphics.add(graphic);
+      geo.forEach(function(line) {
+        var graphic = new Graphic({geometry: line});
+        graphic.symbol = lineSymbol;
+        map.graphics.add(graphic);
+      })
     }
   }
 
